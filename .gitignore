@@ -1,0 +1,13 @@
+
+**/SM64_video
+**/Tim_video
+*.pth
+*.mp4
+*.jpg
+*.png
+*.zip
+*.log
+*.mp3
+*.wav
+!*.py
+!*.json
