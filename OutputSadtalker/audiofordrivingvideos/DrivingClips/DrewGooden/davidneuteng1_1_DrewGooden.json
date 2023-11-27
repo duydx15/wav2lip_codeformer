@@ -1,0 +1,106 @@
+{
+    "0": {
+        "Emotion": "Neutral",
+        "StartFrame": 0,
+        "StartTime": 0,
+        "EndFrame": 900,
+        "EndTime": 30000.0,
+        "ExpectedFrames": 900,
+        "ExpectedDuration": 30000.0,
+        "Mode": "Normal",
+        "Clips": {
+            "A_Hospital_Run_By_Tik_Tokers248_10.mp4": {
+                "Path": "Neutral/2s/A_Hospital_Run_By_Tik_Tokers248_10.mp4",
+                "Duration": 2000,
+                "Frames": 60
+            },
+            "using_AI_to_write_a_youtube_video74_0.mp4": {
+                "Path": "Neutral/3s/using_AI_to_write_a_youtube_video74_0.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "using_AI_to_write_a_youtube_video71_6.mp4": {
+                "Path": "Neutral/3s/using_AI_to_write_a_youtube_video71_6.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "using_AI_to_write_a_youtube_video71_3.mp4": {
+                "Path": "Neutral/1s/using_AI_to_write_a_youtube_video71_3.mp4",
+                "Duration": 1000,
+                "Frames": 30
+            },
+            "using_AI_to_write_a_youtube_video71_2.mp4": {
+                "Path": "Neutral/1s/using_AI_to_write_a_youtube_video71_2.mp4",
+                "Duration": 1000,
+                "Frames": 30
+            },
+            "using_AI_to_write_a_youtube_video2_2.mp4": {
+                "Path": "Neutral/2s/using_AI_to_write_a_youtube_video2_2.mp4",
+                "Duration": 2000,
+                "Frames": 60
+            },
+            "using_AI_to_write_a_youtube_video70_2.mp4": {
+                "Path": "Neutral/2s/using_AI_to_write_a_youtube_video70_2.mp4",
+                "Duration": 2000,
+                "Frames": 60
+            },
+            "YouTuber_Books4_8.mp4": {
+                "Path": "Neutral/1s/YouTuber_Books4_8.mp4",
+                "Duration": 1000,
+                "Frames": 30
+            },
+            "YouTuber_Books4_11.mp4": {
+                "Path": "Neutral/2s/YouTuber_Books4_11.mp4",
+                "Duration": 2000,
+                "Frames": 60
+            },
+            "YouTuber_Books2_2.mp4": {
+                "Path": "Neutral/3s/YouTuber_Books2_2.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "YouTuber_Books0_0.mp4": {
+                "Path": "Neutral/3s/YouTuber_Books0_0.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Why_Does_Pepsi_Have_a_Game_Show86_2.mp4": {
+                "Path": "Neutral/2s/Why_Does_Pepsi_Have_a_Game_Show86_2.mp4",
+                "Duration": 2000,
+                "Frames": 60
+            },
+            "Why_Does_Pepsi_Have_a_Game_Show86_1.mp4": {
+                "Path": "Neutral/3s/Why_Does_Pepsi_Have_a_Game_Show86_1.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Why_Does_Pepsi_Have_a_Game_Show80_0.mp4": {
+                "Path": "Neutral/1s/Why_Does_Pepsi_Have_a_Game_Show80_0.mp4",
+                "Duration": 1000,
+                "Frames": 30
+            },
+            "Why_Does_Pepsi_Have_a_Game_Show55_0.mp4": {
+                "Path": "Neutral/1s/Why_Does_Pepsi_Have_a_Game_Show55_0.mp4",
+                "Duration": 1000,
+                "Frames": 30
+            }
+        },
+        "OriginalDuration": 30000.0,
+        "Stretch_Time": 0.0,
+        "OriginalFrameCount": 900,
+        "Stretch_Frames": 0
+    },
+    "DetailData": {
+        "davidneuteng1_1": {
+            "Start": 0.0,
+            "Duration": 30.0,
+            "Emotion": "Neutral"
+        }
+    },
+    "dataTimeStamp": [
+        [
+            30.0,
+            "Neutral"
+        ]
+    ]
+}

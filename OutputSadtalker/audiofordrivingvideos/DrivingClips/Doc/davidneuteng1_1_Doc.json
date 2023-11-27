@@ -1,0 +1,76 @@
+{
+    "0": {
+        "Emotion": "Neutral",
+        "StartFrame": 0,
+        "StartTime": 0,
+        "EndFrame": 900,
+        "EndTime": 30000.0,
+        "ExpectedFrames": 900,
+        "ExpectedDuration": 30000.0,
+        "Mode": "Normal",
+        "Clips": {
+            "ATTACK_ATTACK_ATTACK_1_133.mp4": {
+                "Path": "Neutral/2s/ATTACK_ATTACK_ATTACK_1_133.mp4",
+                "Duration": 2000,
+                "Frames": 60
+            },
+            "VIDEO_GAME_CHALLENGE_2_0_26.mp4": {
+                "Path": "Neutral/3s/VIDEO_GAME_CHALLENGE_2_0_26.mp4",
+                "Duration": 4000,
+                "Frames": 120
+            },
+            "TURTLE_BEACH_GIVEAWAYS_0_566.mp4": {
+                "Path": "Neutral/3s/TURTLE_BEACH_GIVEAWAYS_0_566.mp4",
+                "Duration": 4000,
+                "Frames": 120
+            },
+            "ATTACK_ATTACK_ATTACK_1_228.mp4": {
+                "Path": "Neutral/3s/ATTACK_ATTACK_ATTACK_1_228.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "TURTLE_BEACH_GIVEAWAYS_3_103.mp4": {
+                "Path": "Neutral/3s/TURTLE_BEACH_GIVEAWAYS_3_103.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "CSGO_WITH_TIMTHETATMAN_1_21.mp4": {
+                "Path": "Neutral/3s/CSGO_WITH_TIMTHETATMAN_1_21.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "DEAD_ISLAND_2_NEW_SEASON_0_146.mp4": {
+                "Path": "Neutral/3s/DEAD_ISLAND_2_NEW_SEASON_0_146.mp4",
+                "Duration": 4000,
+                "Frames": 120
+            },
+            "PUBG_ALL_DAY_5_102.mp4": {
+                "Path": "Neutral/3s/PUBG_ALL_DAY_5_102.mp4",
+                "Duration": 4000,
+                "Frames": 120
+            },
+            "VIDEO_GAME_CHALLENGE_2_0_19.mp4": {
+                "Path": "Neutral/3s/VIDEO_GAME_CHALLENGE_2_0_19.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            }
+        },
+        "OriginalDuration": 30000.0,
+        "Stretch_Time": 0.0,
+        "OriginalFrameCount": 900,
+        "Stretch_Frames": 0
+    },
+    "DetailData": {
+        "davidneuteng1_1": {
+            "Start": 0.0,
+            "Duration": 30.0,
+            "Emotion": "Neutral"
+        }
+    },
+    "dataTimeStamp": [
+        [
+            30.0,
+            "Neutral"
+        ]
+    ]
+}

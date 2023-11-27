@@ -1,0 +1,13 @@
+3sourceheadMovCSV_22Aug_Dr_ES_gfpgan.mp4
+3sourceheadMovCSV_23Aug_Dr_ES_gfpgan.mp4
+DrDisrespect-Falls-in-Love-with-Warzone-again-thanks-to-new-Game-Mode-60FPS.mp4
+DrES_Wav2lipDFLab_320wf414k_fullface_.mp4
+Dr_ES_Wav2lip_DFLab_model384wf327k.mp4
+Dr_ES_Wav2lip_DFLab_model384wf327k_XSeg.mp4
+Dr_ES_Wav2lip_DFLab_model384wf327k_XSeg_lipsync.mp4
+Dr_ES_Wav2lip_DFLab_model384wf327k_lipsync_.mp4
+Dr_ES_Wav2lip_DFLab_model384wf327k_lipsync_debug.mp4
+Dr_ES_Wav2lip_DFLive_model384wf327k_lipsync_.mp4
+Dr_ES_Wav2lip_model320wf414k_fullface.mp4
+Dr_ES_model512v3_Gan78k_lipsync.mp4
+Wav2lipgan_DrES_60fps_4p30.mp4

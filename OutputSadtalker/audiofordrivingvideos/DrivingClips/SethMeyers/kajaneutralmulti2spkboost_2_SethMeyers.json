@@ -1,0 +1,86 @@
+{
+    "0": {
+        "Emotion": "Neutral",
+        "StartFrame": 0,
+        "StartTime": 0,
+        "EndFrame": 960,
+        "EndTime": 32000.0,
+        "ExpectedFrames": 960,
+        "ExpectedDuration": 32000.0,
+        "Mode": "Normal",
+        "Clips": {
+            "Biden_Orders_UFOs_Shot_Down_MTG_Says_Spy_Balloon_Couldve_Been_a_Nuke_A_Closer_Look0_20.mp4": {
+                "Path": "Neutral/2s/Biden_Orders_UFOs_Shot_Down_MTG_Says_Spy_Balloon_Couldve_Been_a_Nuke_A_Closer_Look0_20.mp4",
+                "Duration": 2000,
+                "Frames": 60
+            },
+            "Chaos_and_a_NearBrawl_as_McCarthy_Humiliates_Himself_to_Win_Speaker_Vote_A_Closer_Look31_1.mp4": {
+                "Path": "Neutral/3s/Chaos_and_a_NearBrawl_as_McCarthy_Humiliates_Himself_to_Win_Speaker_Vote_A_Closer_Look31_1.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Criminal_Charges_in_Trump_Election_Case_Could_Be_Imminent_Atlanta_DA_Says_A_Closer_Look26_12.mp4": {
+                "Path": "Neutral/3s/Criminal_Charges_in_Trump_Election_Case_Could_Be_Imminent_Atlanta_DA_Says_A_Closer_Look26_12.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Trump_Turns_on_Fox_and_Murdoch_Amid_Fallout_from_Shocking_Dominion_Lawsuit_A_Closer_Look1_12.mp4": {
+                "Path": "Neutral/3s/Trump_Turns_on_Fox_and_Murdoch_Amid_Fallout_from_Shocking_Dominion_Lawsuit_A_Closer_Look1_12.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Don_Jr_Draws_Embarrassingly_Small_CPAC_Crowd_Trump_Calls_DeSantis_Tiny_D_A_Closer_Look7_5.mp4": {
+                "Path": "Neutral/3s/Don_Jr_Draws_Embarrassingly_Small_CPAC_Crowd_Trump_Calls_DeSantis_Tiny_D_A_Closer_Look7_5.mp4",
+                "Duration": 4000,
+                "Frames": 120
+            },
+            "GOP_Blames_Ohio_Train_Crisis_on_Culture_Wars_MTG_Says_Wind_Farms_Kill_Whales_A_Closer_Look15_3.mp4": {
+                "Path": "Neutral/3s/GOP_Blames_Ohio_Train_Crisis_on_Culture_Wars_MTG_Says_Wind_Farms_Kill_Whales_A_Closer_Look15_3.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "GOP_Caught_in_Classified_Docs_Hypocrisy_as_Trump_Admits_He_Took_Keepsakes_A_Closer_Look15_4.mp4": {
+                "Path": "Neutral/3s/GOP_Caught_in_Classified_Docs_Hypocrisy_as_Trump_Admits_He_Took_Keepsakes_A_Closer_Look15_4.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Fox_Allegedly_Has_a_Secret_Dossier_of_Dirt_On_Tucker_Carlson_Amid_Messy_Split_A_Closer_Look0_18.mp4": {
+                "Path": "Neutral/3s/Fox_Allegedly_Has_a_Secret_Dossier_of_Dirt_On_Tucker_Carlson_Amid_Messy_Split_A_Closer_Look0_18.mp4",
+                "Duration": 4000,
+                "Frames": 120
+            },
+            "Grand_Jury_Hears_from_Key_Witness_in_Trump_Case_Trump_Rips_DeSantis_on_Fox_A_Closer_Look9_19.mp4": {
+                "Path": "Neutral/3s/Grand_Jury_Hears_from_Key_Witness_in_Trump_Case_Trump_Rips_DeSantis_on_Fox_A_Closer_Look9_19.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Fox_Slams_Trump_After_Trump_Rips_DeSantis_on_Fox_in_Ongoing_GOP_Civil_War_A_Closer_Look5_0.mp4": {
+                "Path": "Neutral/3s/Fox_Slams_Trump_After_Trump_Rips_DeSantis_on_Fox_in_Ongoing_GOP_Civil_War_A_Closer_Look5_0.mp4",
+                "Duration": 3000,
+                "Frames": 90
+            },
+            "Fox_Allegedly_Has_a_Secret_Dossier_of_Dirt_On_Tucker_Carlson_Amid_Messy_Split_A_Closer_Look52_0.mp4": {
+                "Path": "Neutral/1s/Fox_Allegedly_Has_a_Secret_Dossier_of_Dirt_On_Tucker_Carlson_Amid_Messy_Split_A_Closer_Look52_0.mp4",
+                "Duration": 1000,
+                "Frames": 30
+            }
+        },
+        "OriginalDuration": 32000.0,
+        "Stretch_Time": 0.0,
+        "OriginalFrameCount": 960,
+        "Stretch_Frames": 0
+    },
+    "DetailData": {
+        "kajaneutralmulti2spkboost_2": {
+            "Start": 0.0,
+            "Duration": 32.0,
+            "Emotion": "Neutral"
+        }
+    },
+    "dataTimeStamp": [
+        [
+            32.0,
+            "Neutral"
+        ]
+    ]
+}

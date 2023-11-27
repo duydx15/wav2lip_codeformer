@@ -1,0 +1,2 @@
+2 model loss: 1785
+Retinaface_h5 loss: 173
