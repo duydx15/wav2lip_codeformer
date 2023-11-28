@@ -52,6 +52,9 @@ parser.add_argument('--nms_threshold', default=0.4, type=float, help='nms_thresh
 parser.add_argument('--keep_top_k', default=750, type=int, help='keep_top_k')
 parser.add_argument('-s', '--save_image', action="store_true", default=False, help='show detection results')
 parser.add_argument('--vis_thres', default=0.5, type=float, help='visualization_threshold')
+parser.add_argument('--input_video', default="../../workspace/model", type=str, help='file text list input video')
+parser.add_argument('--input_audio', default="../../workspace/model", type=str, help='file text list input audio')
+parser.add_argument('--output_video', default="../../workspace/model", type=str, help='file text list output video')
 args = parser.parse_args()
 
 

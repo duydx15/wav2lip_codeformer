@@ -21,17 +21,17 @@ import ffmpeg
 import subprocess
 from PIL import Image
 import warnings
-from pipeline_mobile_resnet_wav2lip import loadmodelface, detection_face_wav2lips
+from pipeline_mobile_resnet_wav2lip import loadmodelface, detection_face_wav2lips,args
 from torchvision import transforms as TF_s
 from collections import OrderedDict
 import segmentation_models_pytorch as smp
 from color_transfer import color_transfer, color_hist_match,linear_color_transfer
 from common import  normalize_channels
 warnings.filterwarnings("ignore")
-import tensorflow as tf
+# import tensorflow as tf
 import time
-from CodeFormer.load_codeformer import process_img,load_codeformer_model,warp_face_codeformer
-
+from CodeFormer.load_codeformer import process_img,load_codeformer_model
+import argparse
 # from XSeg_video import swap_back
 # gpu_options=tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.2)
 # config=tf.compat.v1.ConfigProto(gpu_options=gpu_options)
@@ -602,7 +602,7 @@ def get_box_by_RetinaFace(inimg, mobile_net_wav2lip, resnet_net_wav2lip, device)
 
 
 def get_keypoint_mouth(input_img,face_landmarks,bbox,kf_mouth=None,kf=None,kf_68=None):
-    with open("/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/_wav2lip/config_lipsync_wav2lip.json",'r') as f_lips:
+    with open("./_wav2lip/config_lipsync_wav2lip.json",'r') as f_lips:
         list_keypoint = json.load(f_lips)
     streamer = "Dr"
     lips_pts = list_keypoint[streamer]["FACEMESH_lips_2_up"]
@@ -829,7 +829,7 @@ def gen_lipsync_img_v2(img, mel_chunk, model, device):
     return pred
 
 def lipsync_one_frame(frame, frame_ori,mel_chunk, facemesh, MASK_KP_IDS,  wav2lip_model,\
-                        mobile_net_wav2lip, resnet_net_wav2lip, device,to_tensor,model_Occ,sfd_facedetector,\
+                        mobile_net_wav2lip, resnet_net_wav2lip, device,sfd_facedetector,\
                         codeformer,face_helper,bg_upsampler,kf,kf_mouth,kf_68):
     """
     """
@@ -1072,27 +1072,19 @@ def expand_box_face(image,box,padding_ratio):
 
 
 def main():
-    # vidpath = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/Penguinz_spanish/Wav2lipgan_charlie_60fps.mp4'#_wav2lip/DrDisrespect-Falls-in-Love-with-Warzone-again-thanks-to-new-Game-Mode-30FPS.mp4'
-    # frame_path = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/Penguinz_spanish/charlietest_60fps.mp4'
-    # #'Dr_video/DrDisrespect-Falls-in-Love-with-Warzone-again-thanks-to-new-Game-Mode-30FPS.mp4'
-    # savepath = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/Penguinz_spanish/Wav2lipgan_codeformer_charlie_60fps.mp4'
-    # wavpath = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/Penguinz_spanish/charlietts_lipsync.wav'
 
-    # vidpath = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/keanue/Wav2lipgan_keanu_60fps.mp4'
-    # frame_path = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/keanue/keanu_60fps.mp4'
-    # #'Dr_video/DrDisrespect-Falls-in-Love-with-Warzone-again-thanks-to-new-Game-Mode-30FPS.mp4'
-    # savepath = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/keanue/Wav2lipgan_codeformer_keanu_60fps.mp4'
-    # wavpath = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/DFLive_test/keanue/keanu_lipsync.wav'
+    input_video = args.input_video
+    output_video= args.output_video
+    input_audio = args.input_audio
 
-
-    vidpath = '/home/ubuntu/Duy_test_folder/SadTalker_samples/videostoberunfromsadtalker_11/1/video_scale/david_ref_audio3_ava3_scaled512.mp4'
+    vidpath = input_video
     frame_path = vidpath#'/home/ubuntu/Duy_test_folder/SadTalker_samples/DFL_Oct31/David_sadtalker256_current_base.mp4'
     # vidpath = frame_path#'DrES_Wav2lip_gan_01Dec.mp4'
-    savepath = '/home/ubuntu/Duy_test_folder/SadTalker_samples/videostoberunfromsadtalker_11/1/video_scale/david_ref_audio3_ava3_base.mp4'
-    wavpath = '/home/ubuntu/Duy_test_folder/SadTalker_samples/AvatarVideo_VoiceSamples/David/davidneuteng1_3.mp3'
+    savepath = output_video
+    wavpath = input_audio
     savepath_nonsound = "./output_nonsound_1.mp4"
     device = 'cuda'
-    wav2lip_modelpath = '/home/ubuntu/Duy_test_folder/Retinaface_Mediapipe/wav2lip_model/wav2lip_gan.pth'
+    wav2lip_modelpath = '/home/ubuntu/Documents/wav2lip_codeformer/wav2lip_model/wav2lip_gan.pth'
     MASK_KP_IDS = [2,326, 423,425 ,411,416, 430, 431, 262, 428, 199, 208, 32, 211, 210,192, 187, 205 , 203, 97]
 
     # load all models
@@ -1101,14 +1093,10 @@ def main():
     facemesh = init_face_mesh()
     wav2lip_model = load_model(wav2lip_modelpath, device)
     # gfpgan_model = load_gfpgan_model(gfpgan_modelpath, device)
-    model_Occ,to_tensor = load_FaceOcc()
+    # model_Occ,to_tensor = load_FaceOcc()
     mobile_net_wav2lip, resnet_net_wav2lip = loadmodelface()
 
-
     codeformer,face_helper,bg_upsampler = load_codeformer_model(upscale=2,detection_model='retinaface_resnet50')
-    # print(mel_chunks)
-    # with open("/home/ubuntu/Duy_test_folder/SP_Speechdetection/content/SpeakerDetection/Mel_chunks_29Aug_DrES.json", "r") as outfile:
-    #     mel_chunks = json.load(outfile)
 
     trackkpVideoFace = KalmanArray()
     trackkpVideoMount = KalmanArray()
@@ -1121,7 +1109,6 @@ def main():
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     total_frames = cap_ori.get(cv2.CAP_PROP_FRAME_COUNT)
     encoder_video = ffmpeg_encoder(savepath_nonsound, fps,width, height)
-    List_speak_frame = load_speech_timestamp(fps)
     mel_chunks = get_mel_chunks(wavpath,fps)
 
     minute_start =0
@@ -1161,7 +1148,7 @@ def main():
             # else:
             res = lipsync_one_frame(frame,frame_ori, mel_chunk, facemesh, MASK_KP_IDS, \
                                      wav2lip_model, mobile_net_wav2lip, resnet_net_wav2lip,\
-                                      device,to_tensor, model_Occ,sfd_facedetector,codeformer,\
+                                      device,sfd_facedetector,codeformer,\
                                       face_helper,bg_upsampler,trackkpVideoFace,trackkpVideoMount,trackkpVideo_68)
             # break
             # cv2.putText(res, text='Fr:'+str(count_frame), org=(100, 40), fontFace=cv2.FONT_HERSHEY_TRIPLEX, fontScale=1.1, color=(0, 255, 0),thickness=2)
@@ -1177,7 +1164,7 @@ def main():
     encoder_video.stdin.flush()
     encoder_video.stdin.close()
     time.sleep(3)
-    ffmpeg_cmd = f"""ffmpeg -y -i {savepath_nonsound} -i '{wavpath}' -c:a aac -c:v copy {savepath}"""
+    ffmpeg_cmd = f"""ffmpeg -y  -hide_banner -loglevel quiet -i {savepath_nonsound} -i '{wavpath}' -c:a aac -c:v copy {savepath}"""
     print(ffmpeg_cmd)
     os.system(ffmpeg_cmd)
 
