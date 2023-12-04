@@ -1164,7 +1164,7 @@ def main():
     encoder_video.stdin.flush()
     encoder_video.stdin.close()
     time.sleep(3)
-    ffmpeg_cmd = f"""ffmpeg -y  -hide_banner -loglevel quiet -i {savepath_nonsound} -i '{wavpath}' -c:a aac -c:v copy {savepath}"""
+    ffmpeg_cmd = f"""/home/ubuntu/anaconda3/envs/deepfacelab/bin/ffmpeg -y  -hide_banner -loglevel quiet -i {savepath_nonsound} -i '{wavpath}' -c:a aac -c:v copy {savepath}"""
     print(ffmpeg_cmd)
     os.system(ffmpeg_cmd)
 

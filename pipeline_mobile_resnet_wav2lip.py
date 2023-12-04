@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 import torch
 import torch.backends.cudnn as cudnn
@@ -20,6 +21,7 @@ from tqdm import tqdm
 from PIL import Image
 import ffmpeg
 import subprocess
+sys.path.append(os.path.dirname(__file__))
 LOGURU_FFMPEG_LOGLEVELS = {
 	"trace": "trace",
 	"debug": "debug",
@@ -55,6 +57,8 @@ parser.add_argument('--vis_thres', default=0.5, type=float, help='visualization_
 parser.add_argument('--input_video', default="../../workspace/model", type=str, help='file text list input video')
 parser.add_argument('--input_audio', default="../../workspace/model", type=str, help='file text list input audio')
 parser.add_argument('--output_video', default="../../workspace/model", type=str, help='file text list output video')
+parser.add_argument('--dfl_model', default="../../workspace/model", type=str, help='path model DFLab')
+parser.add_argument('--influencer', default="Kaja", type=str, help='Name model')
 args = parser.parse_args()
 
 
@@ -289,7 +293,7 @@ def loadmodelface():
 	# 						min_tracking_confidence=0.5)
 	device = torch.device("cuda")
 	mobile_net = RetinaFace(cfg=cfg_mnet, phase = 'test')
-	mobile_net = load_model(mobile_net, "./weights/mobilenet0.25_Final.pth", args.cpu)
+	mobile_net = load_model(mobile_net, "/home/ubuntu/Documents/wav2lip_codeformer/weights/mobilenet0.25_Final.pth", args.cpu)
 	mobile_net.eval()
 	print('Finished loading model!')
 	cudnn.benchmark = True
@@ -297,7 +301,7 @@ def loadmodelface():
 	mobile_net = mobile_net.to(device)
 
 	resnet_net = RetinaFace(cfg=cfg_re50, phase = 'test')
-	resnet_net = load_model(resnet_net, "./weights/Resnet50_Final.pth", args.cpu)
+	resnet_net = load_model(resnet_net, "/home/ubuntu/Documents/wav2lip_codeformer/weights/Resnet50_Final.pth", args.cpu)
 	resnet_net.eval()
 	resnet_net = resnet_net.to(device)
 
@@ -313,7 +317,7 @@ if __name__ == '__main__':
 							min_tracking_confidence=0.5)
 
 	mobile_net = RetinaFace(cfg=cfg_mnet, phase = 'test')
-	mobile_net = load_model(mobile_net, "./weights/mobilenet0.25_Final.pth", args.cpu)
+	mobile_net = load_model(mobile_net, "/home/ubuntu/Documents/wav2lip_codeformer/weights/mobilenet0.25_Final.pth", args.cpu)
 	mobile_net.eval()
 	print('Finished loading model!')
 	cudnn.benchmark = True
@@ -321,7 +325,7 @@ if __name__ == '__main__':
 	mobile_net = mobile_net.to(device)
 
 	resnet_net = RetinaFace(cfg=cfg_re50, phase = 'test')
-	resnet_net = load_model(resnet_net, "./weights/Resnet50_Final.pth", args.cpu)
+	resnet_net = load_model(resnet_net, "/home/ubuntu/Documents/wav2lip_codeformer/weights/Resnet50_Final.pth", args.cpu)
 	resnet_net.eval()
 	resnet_net = resnet_net.to(device)
 

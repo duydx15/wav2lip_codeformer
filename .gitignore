@@ -11,3 +11,4 @@
 *.wav
 !*.py
 !*.json
+**__pycache__
