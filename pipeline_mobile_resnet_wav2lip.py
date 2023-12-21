@@ -59,6 +59,7 @@ parser.add_argument('--input_audio', default="../../workspace/model", type=str, 
 parser.add_argument('--output_video', default="../../workspace/model", type=str, help='file text list output video')
 parser.add_argument('--dfl_model', default="../../workspace/model", type=str, help='path model DFLab')
 parser.add_argument('--influencer', default="Kaja", type=str, help='Name model')
+parser.add_argument('--silences', default='[]', type=str, help='data silent timestamp in audio')
 args = parser.parse_args()
 
 

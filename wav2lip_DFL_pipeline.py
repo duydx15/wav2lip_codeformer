@@ -33,6 +33,9 @@ import time
 from CodeFormer.load_codeformer import process_img,load_codeformer_model
 import argparse
 sys.path.append(os.path.dirname(__file__))
+import logging
+from datetime import datetime
+
 # from XSeg_video import swap_back
 # gpu_options=tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.2)
 # config=tf.compat.v1.ConfigProto(gpu_options=gpu_options)
@@ -1029,23 +1032,27 @@ def ffmpeg_encoder(outfile, fps, width, height):
     return encoder_
 
 
-def load_speech_timestamp(fps):
+def load_speech_timestamp(fps,data):
+    # print("DATA TIMESTAMP: ", data , " - ", type(data))
     List_speak_frame = []
-    json_path = '/home/ubuntu/Duy_test_folder/SP_Speechdetection/content/SpeakerDetection/Speech_detected_newaudio_voice.json'
-    with open(json_path,'r') as f:
-        list_inital = json.load(f)
-        List_speak_frame = []#list_inital['data'][:]
-        # print(len(list_inital))
-        for j in range(len(list_inital['data'])):
-            # if list_inital[j]['character'] == 'DrDisrespect':
-            start = int(float(list_inital['data'][j]['start'])*fps)-5
-            stop = int(float(list_inital['data'][j]['end'])*fps)+2
-            # print(j,"-",start, stop)
-            for i in range(start,stop+1):
-                List_speak_frame.append(i)
-            # else:
-            #     continue
-        # print(Lis)
+    
+    list_inital = json.loads(data)
+    # print("DATA ", data[:2])
+    if data[:2] == "[[":
+        # print("group")
+        flattened_list = [item for sublist in list_inital for item in sublist]
+        list_inital = flattened_list
+    # print(list_inital)
+    for j in range(len(list_inital)):
+        # if list_inital[j]['character'] == 'DrDisrespect':
+        start = int(float(list_inital[j]['timestamp'])/1000*fps)
+        stop = start + int(float(list_inital[j]['duration'])/1000*fps)
+        # print(j,"-",start, stop)
+        for i in range(start,stop):
+            List_speak_frame.append(i)
+        # else:
+        #     continue
+    # print(Lis)
     return np.unique(List_speak_frame)
 
 def write_frame(images,encoder_video):
@@ -1073,7 +1080,7 @@ def expand_box_face(image,box,padding_ratio):
 
 
 def main():
-
+    logging.info("START Wav2lip")
     input_video = args.input_video
     output_video= args.output_video
     input_audio = args.input_audio
@@ -1085,7 +1092,7 @@ def main():
     savepath = output_video.split(".mp4")[0] + "_W.mp4"
     savepathDFL = output_video
     wavpath = input_audio
-    savepath_nonsound = "./output_nonsound_1.mp4"
+    savepath_nonsound = os.path.dirname(vidpath) + "/output_nonsound_w.mp4"
     device = 'cuda'
     wav2lip_modelpath = '/home/ubuntu/Documents/wav2lip_codeformer/wav2lip_model/wav2lip_gan.pth'
     MASK_KP_IDS = [2,326, 423,425 ,411,416, 430, 431, 262, 428, 199, 208, 32, 211, 210,192, 187, 205 , 203, 97]
@@ -1098,32 +1105,36 @@ def main():
     # gfpgan_model = load_gfpgan_model(gfpgan_modelpath, device)
     # model_Occ,to_tensor = load_FaceOcc()
     mobile_net_wav2lip, resnet_net_wav2lip = loadmodelface()
-
+    logging.info("Load all model success")
     # codeformer,face_helper,bg_upsampler = load_codeformer_model(upscale=2,detection_model='retinaface_resnet50')
 
     trackkpVideoFace = KalmanArray()
     trackkpVideoMount = KalmanArray()
     trackkpVideo_68 = KalmanArray()
     # read video
+    
     cap = cv2.VideoCapture(vidpath)
     cap_ori =  cv2.VideoCapture(frame_path)
     fps = cap_ori.get(cv2.CAP_PROP_FPS)
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     total_frames = cap_ori.get(cv2.CAP_PROP_FRAME_COUNT)
+    List_speak_frame = load_speech_timestamp(fps,str(args.silences))
+    # print(List_speak_frame)
     encoder_video = ffmpeg_encoder(savepath_nonsound, fps,width, height)
     mel_chunks = get_mel_chunks(wavpath,fps)
-
+    logging.info("Load datas success")
     minute_start =0
     second_start = 0
     minute_stop =1
     second_stop =55
     frame_start = int(minute_start*60*fps+second_start*fps)
-    frame_stop = int(minute_stop*60*fps+second_stop*fps)
+    # frame_stop = int(minute_stop*60*fps+second_stop*fps)
     # frame_start =11600
     # frame_stop = 1200
     print("FPS: ",fps, "-",total_frames,len(mel_chunks))
     total_output_frames =  min(total_frames, len(mel_chunks))
+    frame_stop = total_output_frames
     count_frame = 0
     frame_ref = cv2.imread("/home/ubuntu/Duy_test_folder/SadTalker_samples/David_ref2.png")
     for i in tqdm(range(int(total_output_frames))):
@@ -1146,15 +1157,15 @@ def main():
             # if not ret:
             #     break
             # print("Make ancoder done")
-            # if not count_frame in List_speak_frame:
-            #     write_frame(frame,encoder_video)
-            # else:
-            res = lipsync_one_frame(frame,frame_ori, mel_chunk, facemesh, MASK_KP_IDS, \
-                                     wav2lip_model, mobile_net_wav2lip, resnet_net_wav2lip,\
-                                      device,trackkpVideoFace,trackkpVideoMount,trackkpVideo_68) #sfd_facedetector,codeformer, face_helper,bg_upsampler,
-            # break
-            # cv2.putText(res, text='Fr:'+str(count_frame), org=(100, 40), fontFace=cv2.FONT_HERSHEY_TRIPLEX, fontScale=1.1, color=(0, 255, 0),thickness=2)
-            write_frame(res,encoder_video)
+            if count_frame in List_speak_frame:
+                write_frame(frame,encoder_video)
+            else:
+                res = lipsync_one_frame(frame,frame_ori, mel_chunk, facemesh, MASK_KP_IDS, \
+                                        wav2lip_model, mobile_net_wav2lip, resnet_net_wav2lip,\
+                                        device,trackkpVideoFace,trackkpVideoMount,trackkpVideo_68) #sfd_facedetector,codeformer, face_helper,bg_upsampler,
+                # break
+                # cv2.putText(res, text='Fr:'+str(count_frame), org=(100, 40), fontFace=cv2.FONT_HERSHEY_TRIPLEX, fontScale=1.1, color=(0, 255, 0),thickness=2)
+                write_frame(res,encoder_video)
         # if count_frame == 6357:
         # #     cv2.imwrite("Expand_box.png",res)
         #     break
@@ -1170,6 +1181,7 @@ def main():
     print(ffmpeg_cmd)
     os.system(ffmpeg_cmd)
     time.sleep(2)
+    logging.info("Run Wav2lip successfully!")
     # Command run DFL
     dfl_cmd = f". /home/ubuntu/anaconda3/etc/profile.d/conda.sh && conda activate deepfacelab && /home/ubuntu/anaconda3/envs/deepfacelab/bin/python \
                 /home/ubuntu/Documents/DeepFaceLab_Linux/DeepFaceLab_D/Lipsync_DFL_retina_mp.py \
@@ -1177,11 +1189,14 @@ def main():
                 --input_audio {wavpath} \
                 --dfl_model {influencer} \
                 --output_video {savepathDFL}   "
-    # os.system(dfl_cmd)
     # Run the command
-    
     subprocess.run(dfl_cmd,shell=True, executable='/bin/bash')
     time.sleep(1)
+    logging.info("Run DFL successfully!")
     os.remove(savepath)
+    # os.remove(savepath_nonsound)
+    
 if __name__=='__main__':
+    date = datetime.today().strftime('%Y-%m-%d')
+    logging.basicConfig(filename=f'/home/ubuntu/Documents/wav2lip_codeformer/logs/wav2lip-{date}.log',filemode = 'a', level=logging.INFO,format='%(asctime)s - Wav2lip- %(levelname)s- %(message)s')
     main()
